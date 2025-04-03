@@ -12,6 +12,8 @@ module com.lms.demofx {
     requires eu.hansolo.tilesfx;
 
     opens com.lms.demofx to javafx.fxml;
+    opens com.lms.demofx.Controllers to javafx.fxml;
+
     exports com.lms.demofx;
     exports com.lms.demofx.Controllers;
     exports com.lms.demofx.Controllers.Admin;
