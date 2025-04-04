@@ -1,0 +1,10 @@
+.client-heading{
+    -fx-text-fill: #FFFFFF;
+}
+
+.client-button {
+    -fx-background-color: #793333;
+    -fx-background-radius: 24px;
+    -fx-text-fill: white;
+    -fx-cursor: hand; /* JavaFX uses "hand" instead of CSS's "pointer" */
+}

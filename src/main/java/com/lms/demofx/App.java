@@ -10,6 +10,7 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
      try{
          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Admin/Admin.fxml"));
+//         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Client/Client.fxml"));
          Scene scene = new Scene(fxmlLoader.load());
          stage.setScene(scene);
          stage.setTitle("Admin");

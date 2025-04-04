@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
         BrandingImageView.setImage(brandingImage);
     }
 
-    public void setErrorLabel(ActionEvent event) {
+    private void setErrorLabel(ActionEvent event) {
         errorLabel.setText("Invalid username or password");
     }
 

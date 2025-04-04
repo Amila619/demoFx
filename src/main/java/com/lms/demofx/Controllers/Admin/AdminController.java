@@ -1,73 +1,73 @@
 package com.lms.demofx.Controllers.Admin;
 
+import com.lms.demofx.Models.User;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.shape.Circle;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
 
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
+
 public class AdminController implements Initializable {
-
-    private HashMap<String, Integer> subjectMarks;
-    private ObservableList<PieChart.Data> pieChartData;
-
-    @FXML
-    private Label adUserLabel;
 
     @FXML
     private Circle adAvatar;
 
     @FXML
-    private PieChart adPieChart;
+    private Label adUserLabel;
+
+    @FXML
+    private TableView<User> userTable;
+
+    @FXML
+    private TableColumn<User, Integer> age;
+
+    @FXML
+    private TableColumn<User, String> name;
+
+    @FXML
+    private TableColumn<User, String> province;
 
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        setAdAvatar("/Images/bird_2.jpg");
-        setAdUserLabel("John");
-        initHashMap();
-        setAdPieChart();
+        setAdAvatar("/Images/1250.jpg");
+        setAdUserLabel();
+        setTable();
+    }
+
+    private ObservableList<User> setTableData() {
+        User u1 = new User("Jagath", 22, "Sabaragamuwa");
+        User u2 = new User("Perera", 32, "Southern");
+        return FXCollections.<User>observableArrayList(u1, u2);
     }
 
     @FXML
-    public void setAdUserLabel(String uname) {
-        adUserLabel.setText("Welcome " + uname);
+    private void setAdUserLabel() {
+        adUserLabel.setText("Admin");
     }
 
     @FXML
-    public void setAdAvatar(String path) {
+    private void setAdAvatar(String path) {
         Image img = new Image(getClass().getResourceAsStream(path));
         adAvatar.setFill(new ImagePattern(img));
     }
 
     @FXML
-    public void setAdPieChart() {
-        pieChartData = FXCollections.observableArrayList();
-        for (String subject : subjectMarks.keySet()) {
-            pieChartData.add(new PieChart.Data(subject, subjectMarks.get(subject)));
-        }
+    private void setTable() {
+        name.setCellValueFactory(new PropertyValueFactory<User, String>("name"));
+        age.setCellValueFactory(new PropertyValueFactory<User, Integer>("age"));
+        province.setCellValueFactory(new PropertyValueFactory<User, String>("province"));
 
-        adPieChart.setTitle("Subject List");
-        adPieChart.setData(pieChartData);
+        userTable.setItems(setTableData());
     }
-
-    @FXML
-    public void initHashMap() {
-        subjectMarks = new HashMap<String, Integer>();
-
-        subjectMarks.put("English", 33);
-        subjectMarks.put("Maths", 22);
-        subjectMarks.put("Bio", 13);
-        subjectMarks.put("Sinhala", 32);
-    }
-
 }

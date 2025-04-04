@@ -1,3 +1,14 @@
-.admin_heading{
+.admin-heading{
     -fx-text-fill: #FFFFFF;
+}
+
+.admin-table{
+    -fx-text-alignment: center;
+}
+
+.admin-button {
+    -fx-background-color: #793333;
+    -fx-background-radius: 24px;
+    -fx-text-fill: white;
+    -fx-cursor: hand; /* JavaFX uses "hand" instead of CSS's "pointer" */
 }
