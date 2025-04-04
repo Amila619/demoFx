@@ -13,6 +13,8 @@ module com.lms.demofx {
 
     opens com.lms.demofx to javafx.fxml;
     opens com.lms.demofx.Controllers to javafx.fxml;
+    opens com.lms.demofx.Controllers.Admin to javafx.fxml;
+    opens com.lms.demofx.Controllers.Client to javafx.fxml;
 
     exports com.lms.demofx;
     exports com.lms.demofx.Controllers;

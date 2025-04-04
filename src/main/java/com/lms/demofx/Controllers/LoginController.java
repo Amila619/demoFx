@@ -2,6 +2,7 @@ package com.lms.demofx.Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
@@ -13,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class LoginController {
+public class LoginController implements Initializable {
 
     @FXML
     private Label errorLabel;
@@ -39,9 +40,8 @@ public class LoginController {
     @FXML
     private Button loginBtn;
 
-    public void init(URL url, ResourceBundle resourceBundle) {
-        File brandingFile = new File("images/1250.jpg");
-        Image brandingImage = new Image(brandingFile.toURI().toString());
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        Image brandingImage = new Image(getClass().getResourceAsStream("/Images/1250.jpg"));
         BrandingImageView.setImage(brandingImage);
     }
 

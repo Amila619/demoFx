@@ -8,11 +8,14 @@ import javafx.stage.Stage;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Login.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.setTitle("Login");
-        stage.show();
-
+     try{
+         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/Fxml/Admin/Admin.fxml"));
+         Scene scene = new Scene(fxmlLoader.load());
+         stage.setScene(scene);
+         stage.setTitle("Admin");
+         stage.show();
+     }catch (Exception e){
+         System.out.println("error : " + e + "\nerror-message: " + e.getMessage());
+     }
     }
 }
