@@ -17,9 +17,16 @@ module com.lms.demofx {
 
     opens com.lms.demofx to javafx.fxml;
     opens com.lms.demofx.Controllers to javafx.fxml;
+    opens com.lms.demofx.Controllers.Dashboard to javafx.fxml;
+    opens com.lms.demofx.Models to javafx.fxml;
+    opens com.lms.demofx.Utils to javafx.fxml;
+    opens com.lms.demofx.Services to javafx.fxml;
 
     exports com.lms.demofx;
     exports com.lms.demofx.Controllers;
+    exports com.lms.demofx.Controllers.Dashboard;
     exports com.lms.demofx.Models;
+    exports com.lms.demofx.Utils;
+    exports com.lms.demofx.Services;
 
 }
