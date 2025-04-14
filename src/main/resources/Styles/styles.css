@@ -1,0 +1,53 @@
+.inp-field {
+    -fx-padding: 6px;
+    -fx-border-style: none;
+    -fx-background-radius: 6px;
+}
+
+.custom-button {
+    -fx-background-color: #793333;
+    -fx-background-radius: 24px;
+    -fx-text-fill: white;
+    -fx-cursor: hand; /* JavaFX uses "hand" instead of CSS's "pointer" */
+}
+
+.custom-button:hover {
+    -fx-background-color: #9a5252; /* Lighter/darker shade for hover */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 5, 0.2, 0, 1); /* Optional subtle shadow */
+}
+
+.dialog-pane {
+    -fx-background-color: #fefefe;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #793333;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Segoe UI";
+    -fx-alignment: center;
+}
+
+.dialog-pane .content {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-text-alignment: center;
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-color: #d9534f;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-cursor: hand;
+}
+
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: #c9302c;
+}
