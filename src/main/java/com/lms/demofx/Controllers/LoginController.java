@@ -55,7 +55,7 @@ public class LoginController implements Initializable {
 
         try {
             if (username.equals("") || password.equals("")) {
-                popUpErrorMessage("Username or Password are Required");
+                popUpErrorMessage("Username and Password are Required");
             } else {
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, username);
