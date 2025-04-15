@@ -7,7 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import java.io.IOException;
@@ -39,6 +41,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         navigate("/Fxml/Dashboard/Home.fxml");
+        setProfilePic();
     }
 
     @FXML
@@ -69,5 +72,11 @@ public class DashboardController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setProfilePic() {
+        String path = getClass().getResource("/Images/User/dp.jpg").toExternalForm();
+        Image image = new Image(path);
+        profilePic.setFill(new ImagePattern(image));
     }
 }
