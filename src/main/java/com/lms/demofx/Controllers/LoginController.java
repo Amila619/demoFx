@@ -1,12 +1,19 @@
 package com.lms.demofx.Controllers;
 
+import com.lms.demofx.Controllers.Dashboard.DashboardController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -15,6 +22,10 @@ import com.lms.demofx.Services.Database;
 import com.lms.demofx.Utils.PasswordUtils;
 
 public class LoginController implements Initializable {
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
     private String username, password, db_uid, db_hash, sql;
     private Connection conn;
@@ -51,23 +62,22 @@ public class LoginController implements Initializable {
         username = unTextField.getText().trim();
         password = pswdTextField.getText().trim();
         conn = Database.Conn();
-        sql = "SELECT User_Id, Password FROM user WHERE Email=?";
+        sql = "SELECT u_id, user_password FROM users WHERE email=?";
 
         try {
             if (username.equals("") || password.equals("")) {
-                popUpErrorMessage("Username or Password are Required");
+                popUpErrorMessage("Username and Password are Required");
             } else {
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, username);
                 rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    db_uid = rs.getString("User_Id");
-                    db_hash = rs.getString("Password");
+                    db_uid = rs.getString("u_id");
+                    db_hash = rs.getString("user_password");
 
                     if (PasswordUtils.verifyPassword(password, db_hash)) {
-                        System.out.println("Successfully logged in");
-                        onLogin(); // Optional: close login screen
+                        loadDashboard(db_uid);
                     } else {
                         popUpErrorMessage("Invalid Password or Username");
                     }
@@ -78,6 +88,8 @@ public class LoginController implements Initializable {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         } finally {
             try {
                 conn.close();
@@ -87,10 +99,6 @@ public class LoginController implements Initializable {
         }
     }
 
-    private void onLogin() {
-        Stage loginStage = (Stage) loginBtn.getScene().getWindow();
-        loginStage.close();
-    }
 
     private void popUpErrorMessage(String error) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -102,5 +110,18 @@ public class LoginController implements Initializable {
         DialogPane dialogPane = alert.getDialogPane();
         dialogPane.getStylesheets().add(getClass().getResource("/Styles/styles.css").toExternalForm());
         alert.showAndWait();
+    }
+
+    private void loadDashboard(String id) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Dashboard/Dashboard.fxml"));
+        root = loader.load();
+
+        DashboardController dbcontroller = loader.getController();
+        dbcontroller.setUserId(id);
+
+        stage = (Stage) loginBtn.getScene().getWindow();
+        scene = new Scene(root);
+        stage.setTitle("Dashboard");
+        stage.setScene(scene);
     }
 }
