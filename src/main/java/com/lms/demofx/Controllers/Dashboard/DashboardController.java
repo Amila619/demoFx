@@ -1,25 +1,33 @@
 package com.lms.demofx.Controllers.Dashboard;
 
+import com.lms.demofx.Services.Database;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.sql.*;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
 
     private Parent root;
-    private String userId;
+    private String userId, sql;
+
+    private Connection conn;
+    private PreparedStatement ps;
+    private ResultSet rs;
+    private InputStream is;
+    private FileOutputStream fos;
 
     @FXML
     private BorderPane dashBoardPane;
@@ -75,14 +83,56 @@ public class DashboardController implements Initializable {
     }
 
     private void setProfilePic() {
-        String path = getClass().getResource("/Images/User/dp.jpg").toExternalForm();
-        Image image = new Image(path);
-        profilePic.setFill(new ImagePattern(image));
-        System.out.println(userId);
+        try {
+            URL imageUrl = getClass().getResource("/Images/User/dp.jpg");
+
+            if (imageUrl == null) {
+                imageUrl = getClass().getResource("/Images/User/temp.jpg");
+            }
+
+            Image image = new Image(imageUrl.toExternalForm());
+            profilePic.setFill(new ImagePattern(image));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setUserId(String id) {
         userId = id;
+        getImageFromDatabase(userId, "src/main/resources/Images/User/dp.jpg");
+    }
+
+    private void getImageFromDatabase(String userId, String outputPath) {
+        try {
+             conn = Database.Conn();
+             sql = "SELECT user_dp FROM users WHERE u_id=?";
+             ps = conn.prepareStatement(sql);
+
+            ps.setString(1, userId);
+             rs = ps.executeQuery();
+
+            if (rs.next()) {
+                 is = rs.getBinaryStream("user_dp");
+
+                try {
+                     fos = new FileOutputStream(outputPath);
+                    byte[] buffer = new byte[1024];
+                    int bytesRead;
+                    while ((bytesRead = is.read(buffer)) != -1) {
+                        fos.write(buffer, 0, bytesRead);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                is.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         setProfilePic();
     }
 }

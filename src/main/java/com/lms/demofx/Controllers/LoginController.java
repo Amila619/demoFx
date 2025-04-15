@@ -61,10 +61,11 @@ public class LoginController implements Initializable {
     private void handleLogin(ActionEvent event) {
         username = unTextField.getText().trim();
         password = pswdTextField.getText().trim();
-        conn = Database.Conn();
-        sql = "SELECT u_id, user_password FROM users WHERE email=?";
 
         try {
+            conn = Database.Conn();
+            sql = "SELECT u_id, user_password FROM users WHERE email=?";
+
             if (username.equals("") || password.equals("")) {
                 popUpErrorMessage("Username and Password are Required");
             } else {
