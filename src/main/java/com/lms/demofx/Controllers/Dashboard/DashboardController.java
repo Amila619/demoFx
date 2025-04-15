@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
 
     private Parent root;
+    private String userId;
 
     @FXML
     private BorderPane dashBoardPane;
@@ -41,7 +42,6 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         navigate("/Fxml/Dashboard/Home.fxml");
-        setProfilePic();
     }
 
     @FXML
@@ -78,5 +78,11 @@ public class DashboardController implements Initializable {
         String path = getClass().getResource("/Images/User/dp.jpg").toExternalForm();
         Image image = new Image(path);
         profilePic.setFill(new ImagePattern(image));
+        System.out.println(userId);
+    }
+
+    public void setUserId(String id) {
+        userId = id;
+        setProfilePic();
     }
 }
