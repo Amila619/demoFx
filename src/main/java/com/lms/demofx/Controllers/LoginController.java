@@ -1,6 +1,7 @@
 package com.lms.demofx.Controllers;
 
 import com.lms.demofx.Controllers.Dashboard.DashboardController;
+import com.lms.demofx.Utils.SceneHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,9 +23,6 @@ import com.lms.demofx.Services.Database;
 import com.lms.demofx.Utils.PasswordUtils;
 
 public class LoginController implements Initializable {
-
-    private Stage stage;
-    private Scene scene;
     private Parent root;
 
     private String username, password, db_uid, db_hash, sql;
@@ -114,15 +112,12 @@ public class LoginController implements Initializable {
     }
 
     private void loadDashboard(String id) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Fxml/Dashboard/Dashboard.fxml"));
+        FXMLLoader loader = SceneHandler.createLoader("Dashboard.fxml");
         root = loader.load();
 
         DashboardController dbcontroller = loader.getController();
         dbcontroller.setUserId(id);
 
-        stage = (Stage) loginBtn.getScene().getWindow();
-        scene = new Scene(root);
-        stage.setTitle("Dashboard");
-        stage.setScene(scene);
+        SceneHandler.switchScene(loginBtn, root, "/Fxml/Dashboard/Dashboard.fxml");
     }
 }
