@@ -28,6 +28,9 @@ public class DisplayController extends DashboardController {
     private TableColumn<?, Double> productPrice;
 
     @FXML
+    private TableColumn<?, Integer> productId;
+
+    @FXML
     private TableColumn<?, Integer> productQuantity;
 
     @FXML
@@ -51,17 +54,24 @@ public class DisplayController extends DashboardController {
             rs = st.executeQuery(sql);
 
             while (rs.next()) {
-                products.add(new Product(rs.getString("product_name"), rs.getInt("product_quantity"), rs.getDouble("product_price")));
+                products.add(new Product(rs.getInt("product_id"), rs.getString("product_name"), rs.getInt("product_quantity"), rs.getDouble("product_price")));
             }
 
         }catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println("Error in closing the Connection..." + e.getMessage());
+            }
         }
 
         return products;
     }
 
     private void setTable() {
+        productId.setCellValueFactory(new PropertyValueFactory<>("product_id"));
         productName.setCellValueFactory(new PropertyValueFactory<>("product_name"));
         productQuantity.setCellValueFactory(new PropertyValueFactory<>("product_quantity"));
         productPrice.setCellValueFactory(new PropertyValueFactory<>("product_price"));

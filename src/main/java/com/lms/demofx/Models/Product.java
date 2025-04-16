@@ -1,11 +1,22 @@
 package com.lms.demofx.Models;
 
 public class Product {
+    private int product_id;
     private String product_name;
     private int product_quantity;
     private double product_price;
 
-    public Product(String product_name, int product_quantity, double product_price) {
+
+    public int getProduct_id() {
+        return product_id;
+    }
+
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
+    }
+
+    public Product(int product_id, String product_name, int product_quantity, double product_price) {
+        this.product_id = product_id;
         this.product_name = product_name;
         this.product_quantity = product_quantity;
         this.product_price = product_price;
