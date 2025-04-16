@@ -13,9 +13,9 @@
             <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" spacing="30.0" styleClass="navpane">
                <children>
                   <Circle fx:id="profilePic" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="profile-pic" />
-                  <Button fx:id="homeButton" mnemonicParsing="false" onAction="#navigateToHome" styleClass="navbtn" text="Home" />
-                  <Button fx:id="insertButton" mnemonicParsing="false" onAction="#navigateToInsert" styleClass="navbtn" text="Insert" />
                   <Button fx:id="displayButton" mnemonicParsing="false" onAction="#navigateToDisplay" styleClass="navbtn" text="Display" />
+                  <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#navigateToDelete" styleClass="navbtn" text="Delete" />
+                  <Button fx:id="insertButton" mnemonicParsing="false" onAction="#navigateToInsert" styleClass="navbtn" text="Insert" />
                   <Button fx:id="updateButton" mnemonicParsing="false" onAction="#navigateToUpdate" styleClass="navbtn" text="Update" />
                </children>
             </VBox>

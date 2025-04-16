@@ -36,7 +36,7 @@ public class DashboardController implements Initializable {
     private Button displayButton;
 
     @FXML
-    private Button homeButton;
+    private Button deleteButton;
 
     @FXML
     private Button insertButton;
@@ -49,12 +49,12 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        navigate("/Fxml/Dashboard/Home.fxml");
+        navigate("/Fxml/Dashboard/Display.fxml");
     }
 
     @FXML
-    private void navigateToHome(ActionEvent event){
-        navigate("/Fxml/Dashboard/Home.fxml");
+    private void navigateToDelete(ActionEvent event){
+        navigate("/Fxml/Dashboard/Delete.fxml");
     }
 
     @FXML
@@ -116,7 +116,7 @@ public class DashboardController implements Initializable {
                  is = rs.getBinaryStream("user_dp");
 
                 try {
-                     fos = new FileOutputStream(outputPath);
+                    fos = new FileOutputStream(outputPath);
                     byte[] buffer = new byte[1024];
                     int bytesRead;
                     while ((bytesRead = is.read(buffer)) != -1) {
