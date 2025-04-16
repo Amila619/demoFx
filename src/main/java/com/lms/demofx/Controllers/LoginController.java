@@ -1,6 +1,7 @@
 package com.lms.demofx.Controllers;
 
 import com.lms.demofx.Controllers.Dashboard.DashboardController;
+import com.lms.demofx.Utils.CustomUi;
 import com.lms.demofx.Utils.SceneHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,7 +66,7 @@ public class LoginController implements Initializable {
             sql = "SELECT u_id, user_password FROM users WHERE email=?";
 
             if (username.equals("") || password.equals("")) {
-                popUpErrorMessage("Username and Password are Required");
+                CustomUi.popUpErrorMessage("Username and Password are Required", Alert.AlertType.WARNING);
             } else {
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, username);
@@ -78,17 +79,15 @@ public class LoginController implements Initializable {
                     if (PasswordUtils.verifyPassword(password, db_hash)) {
                         loadDashboard(db_uid);
                     } else {
-                        popUpErrorMessage("Invalid Password or Username");
+                        CustomUi.popUpErrorMessage("Invalid Password or Username", Alert.AlertType.ERROR);
                     }
                 } else {
-                    popUpErrorMessage("User Not Found");
+                    CustomUi.popUpErrorMessage("User Not Found", Alert.AlertType.ERROR);
                 }
             }
 
-        } catch (SQLException e) {
+        } catch (Exception  e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         } finally {
             try {
                 conn.close();
@@ -98,18 +97,6 @@ public class LoginController implements Initializable {
         }
     }
 
-
-    private void popUpErrorMessage(String error) {
-        Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Login Error");
-        alert.setHeaderText(error);
-        alert.setContentText("Please try again.");
-
-        // Load custom CSS
-        DialogPane dialogPane = alert.getDialogPane();
-        dialogPane.getStylesheets().add(getClass().getResource("/Styles/styles.css").toExternalForm());
-        alert.showAndWait();
-    }
 
     private void loadDashboard(String id) throws IOException {
         FXMLLoader loader = SceneHandler.createLoader("Dashboard.fxml");

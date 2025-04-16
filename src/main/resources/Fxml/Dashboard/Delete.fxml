@@ -24,7 +24,7 @@
             <Label fx:id="productIdInputLabel" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="171.0" text="Product Id" />
          </children>
       </GridPane>
-      <Button fx:id="deleteProduct" layoutX="111.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="177.0" text="Delete" />
+      <Button fx:id="deleteProduct" onAction="#deleteProduct" layoutX="111.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="177.0" text="Delete" />
       <Label fx:id="deleteHeading" alignment="CENTER" layoutX="102.0" layoutY="34.0" prefHeight="17.0" prefWidth="195.0" text="Delete Product">
          <font>
             <Font size="24.0" />
