@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -35,12 +36,20 @@
                 <Label fx:id="pswdLabel" layoutX="40.0" layoutY="188.0" text="Password" textFill="#793333" />
                 <PasswordField fx:id="pswdTextField" layoutX="40.0" layoutY="217.0" prefHeight="25.0" prefWidth="215.0" styleClass="inp-field" />
                 <TextField fx:id="unTextField" layoutX="38.0" layoutY="147.0" prefHeight="25.0" prefWidth="213.0" styleClass="inp-field" />
-                <Button fx:id="signupBtn" layoutX="38.0" layoutY="493.0" mnemonicParsing="false" onAction="#handleSignup" prefHeight="35.0" prefWidth="214.0" styleClass="custom-button" text="Signup" textFill="WHITE" />
+                <Button fx:id="signupBtn" layoutX="38.0" layoutY="491.0" mnemonicParsing="false" onAction="#handleSignup" prefHeight="35.0" prefWidth="214.0" styleClass="custom-button" text="Signup" textFill="WHITE" />
             <PasswordField fx:id="cpswdTextField" layoutX="40.0" layoutY="286.0" prefHeight="25.0" prefWidth="215.0" styleClass="inp-field" />
             <Label fx:id="cpswdLabel" layoutX="40.0" layoutY="258.0" prefHeight="17.0" prefWidth="99.0" text="Confirm Password" textFill="#793333" />
-            <Label fx:id="uimageLabel" layoutX="40.0" layoutY="334.0" prefHeight="17.0" prefWidth="67.0" text="User Image" textFill="#793333" />
-            <Circle fx:id="userUploadProfilePic" fill="DODGERBLUE" layoutX="90.0" layoutY="418.0" radius="54.0" stroke="BLACK" strokeType="INSIDE" />
-            <Button fx:id="fileUploadButton" onAction="#setProfilePicUpload" layoutX="176.0" layoutY="406.0" mnemonicParsing="false" text="File" />
+            <Label fx:id="uimageLabel" layoutX="40.0" layoutY="331.0" prefHeight="17.0" prefWidth="67.0" text="User Image" textFill="#793333" />
+            <Circle fx:id="userUploadProfilePic" fill="DODGERBLUE" layoutX="90.0" layoutY="413.0" radius="54.0" stroke="BLACK" strokeType="INSIDE" />
+            <Button fx:id="fileUploadButton" layoutX="176.0" layoutY="404.0" mnemonicParsing="false" onAction="#setProfilePicUpload" text="File" />
+            <Label fx:id="navLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="534.0" onMouseClicked="#loadLogin" prefHeight="18.0" prefWidth="162.0" text="Already have an account Log now " textAlignment="CENTER">
+               <font>
+                  <Font size="10.0" />
+               </font>
+               <effect>
+                  <Glow />
+               </effect>
+            </Label>
             </children></AnchorPane>
    </center>
 </BorderPane>

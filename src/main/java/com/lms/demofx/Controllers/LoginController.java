@@ -8,12 +8,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,6 +49,9 @@ public class LoginController implements Initializable {
 
     @FXML
     private Button loginBtn;
+
+    @FXML
+    private Label navLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -106,5 +107,14 @@ public class LoginController implements Initializable {
         dbcontroller.setUserId(id);
 
         SceneHandler.switchScene(loginBtn, root, "/Fxml/Dashboard/Dashboard.fxml");
+    }
+
+    @FXML
+    private void loadSignUp(MouseEvent event) throws IOException {
+        FXMLLoader loader = SceneHandler.createLoader("/Fxml/Signup.fxml");
+        root = loader.load();
+
+        SceneHandler.switchScene(loginBtn, root, "Signup");
+
     }
 }

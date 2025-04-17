@@ -16,6 +16,6 @@ public class SceneHandler {
     }
 
     public static FXMLLoader createLoader(String path) {
-        return new FXMLLoader(SceneHandler.class.getResource("/Fxml/Dashboard/Dashboard.fxml"));
+        return new FXMLLoader(SceneHandler.class.getResource(path));
     }
 }
