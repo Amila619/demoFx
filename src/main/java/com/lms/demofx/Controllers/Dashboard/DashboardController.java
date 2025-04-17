@@ -1,6 +1,7 @@
 package com.lms.demofx.Controllers.Dashboard;
 
 import com.lms.demofx.Services.Database;
+import com.lms.demofx.Utils.SceneHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import javafx.scene.input.MouseEvent;
 import java.io.*;
 import java.net.URL;
 import java.sql.*;
@@ -21,7 +23,8 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
 
     private Parent root;
-    private String userId, sql;
+    private String sql;
+    private int userId;
 
     private Connection conn;
     private PreparedStatement ps;
@@ -37,6 +40,9 @@ public class DashboardController implements Initializable {
 
     @FXML
     private Button deleteButton;
+
+    @FXML
+    private Button logoutButton;
 
     @FXML
     private Button insertButton;
@@ -73,6 +79,20 @@ public class DashboardController implements Initializable {
     }
 
     @FXML
+    private void navigateToUpdateProfile(MouseEvent event){
+        navigate("/Fxml/Dashboard/UpdateProfile.fxml");
+    }
+
+    @FXML
+    void navigateToLogin(ActionEvent event) throws IOException {
+        FXMLLoader loader = SceneHandler.createLoader("/Fxml/Login.fxml");
+        root = loader.load();
+
+        SceneHandler.switchScene(logoutButton, root, "Login");
+        // delete all images inside of user directory
+    }
+
+    @FXML
     private void navigate(String path) {
         try {
             root = FXMLLoader.load(getClass().getResource(path));
@@ -98,18 +118,18 @@ public class DashboardController implements Initializable {
         }
     }
 
-    public void setUserId(String id) {
+    public void setUserId(int id) {
         userId = id;
         getImageFromDatabase(userId, "src/main/resources/Images/User/dp.jpg");
     }
 
-    private void getImageFromDatabase(String userId, String outputPath) {
+    private void getImageFromDatabase(int userId, String outputPath) {
         try {
              conn = Database.Conn();
              sql = "SELECT user_dp FROM users WHERE u_id=?";
              ps = conn.prepareStatement(sql);
 
-            ps.setString(1, userId);
+            ps.setInt(1, userId);
              rs = ps.executeQuery();
 
             if (rs.next()) {

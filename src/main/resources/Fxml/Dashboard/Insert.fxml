@@ -30,7 +30,7 @@
             <Label fx:id="productPriceInputLabel" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="147.0" text="Product Price" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="addProduct" layoutX="111.0" layoutY="296.0" mnemonicParsing="false" onAction="#insertProduct" prefHeight="25.0" prefWidth="177.0" text="Add" />
+      <Button fx:id="addProduct" layoutX="111.0" layoutY="296.0" mnemonicParsing="false" onAction="#insertProduct" styleClass="custom-button" prefHeight="25.0" prefWidth="177.0" text="Add" />
       <Label fx:id="insertHeading" alignment="CENTER" layoutX="102.0" layoutY="34.0" prefHeight="17.0" prefWidth="195.0" text="Insert Product">
          <font>
             <Font size="24.0" />

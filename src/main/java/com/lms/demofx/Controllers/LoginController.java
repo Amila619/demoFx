@@ -24,7 +24,8 @@ import com.lms.demofx.Utils.PasswordUtils;
 public class LoginController implements Initializable {
     private Parent root;
 
-    private String username, password, db_uid, db_hash, sql;
+    private String username, password, db_hash, sql;
+    private int db_uid;
     private Connection conn;
     private PreparedStatement ps;
     private ResultSet rs;
@@ -74,7 +75,7 @@ public class LoginController implements Initializable {
                 rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    db_uid = rs.getString("u_id");
+                    db_uid = rs.getInt("u_id");
                     db_hash = rs.getString("user_password");
 
                     if (PasswordUtils.verifyPassword(password, db_hash)) {
@@ -99,14 +100,14 @@ public class LoginController implements Initializable {
     }
 
 
-    private void loadDashboard(String id) throws IOException {
-        FXMLLoader loader = SceneHandler.createLoader("Dashboard.fxml");
+    private void loadDashboard(int id) throws IOException {
+        FXMLLoader loader = SceneHandler.createLoader("/Fxml/Dashboard/Dashboard.fxml");
         root = loader.load();
 
         DashboardController dbcontroller = loader.getController();
         dbcontroller.setUserId(id);
 
-        SceneHandler.switchScene(loginBtn, root, "/Fxml/Dashboard/Dashboard.fxml");
+        SceneHandler.switchScene(loginBtn, root, "Dashboard");
     }
 
     @FXML
