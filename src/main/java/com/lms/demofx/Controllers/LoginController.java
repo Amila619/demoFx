@@ -1,14 +1,9 @@
 package com.lms.demofx.Controllers;
 
-import com.lms.demofx.Controllers.Dashboard.DashboardController;
 import com.lms.demofx.Utils.CustomUi;
-import com.lms.demofx.Utils.SceneHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -21,13 +16,9 @@ import java.util.ResourceBundle;
 import com.lms.demofx.Services.Database;
 import com.lms.demofx.Utils.PasswordUtils;
 
-public class LoginController implements Initializable {
-    private Parent root;
-
-    private String username, password, db_uid, db_hash, sql;
-    private Connection conn;
-    private PreparedStatement ps;
-    private ResultSet rs;
+public class LoginController extends BaseController {
+    private String username, password, db_hash;
+    private int db_uid;
 
     @FXML
     private Label headLogin;
@@ -74,11 +65,12 @@ public class LoginController implements Initializable {
                 rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    db_uid = rs.getString("u_id");
+                    db_uid = rs.getInt("u_id");
                     db_hash = rs.getString("user_password");
 
                     if (PasswordUtils.verifyPassword(password, db_hash)) {
-                        loadDashboard(db_uid);
+                        userId = db_uid;
+                        loadDashboard(loginBtn);
                     } else {
                         CustomUi.popUpErrorMessage("Invalid Password or Username", Alert.AlertType.ERROR);
                     }
@@ -97,24 +89,9 @@ public class LoginController implements Initializable {
             }
         }
     }
-
-
-    private void loadDashboard(String id) throws IOException {
-        FXMLLoader loader = SceneHandler.createLoader("Dashboard.fxml");
-        root = loader.load();
-
-        DashboardController dbcontroller = loader.getController();
-        dbcontroller.setUserId(id);
-
-        SceneHandler.switchScene(loginBtn, root, "/Fxml/Dashboard/Dashboard.fxml");
-    }
-
+    
     @FXML
-    private void loadSignUp(MouseEvent event) throws IOException {
-        FXMLLoader loader = SceneHandler.createLoader("/Fxml/Signup.fxml");
-        root = loader.load();
-
-        SceneHandler.switchScene(loginBtn, root, "Signup");
-
+    private void handleLoadSignUp(MouseEvent event) throws IOException {
+        loadSignUp(loginBtn);
     }
 }

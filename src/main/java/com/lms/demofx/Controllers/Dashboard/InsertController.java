@@ -10,21 +10,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class InsertController extends DashboardController {
 
 
-    private String sql, productName;
+    private String productName;
     private int productQuantity;
     private double productPrice;
-    private Connection conn;
-    private PreparedStatement ps;
-    private ResultSet rs;
 
     @FXML
     private Button addProduct;

@@ -1,6 +1,5 @@
 package com.lms.demofx.Controllers.Dashboard;
 
-import com.lms.demofx.Models.Product;
 import com.lms.demofx.Services.Database;
 import com.lms.demofx.Utils.CustomUi;
 import javafx.collections.FXCollections;
@@ -17,13 +16,6 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class DeleteController extends DashboardController {
-
-    private int id;
-    private String sql;
-    private Connection conn;
-    private Statement st;
-    private PreparedStatement ps;
-    private ResultSet rs;
 
     @FXML
     private Label deleteHeading;

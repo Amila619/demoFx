@@ -6,23 +6,24 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 
-<BorderPane fx:id="dashBoardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="dashboard" stylesheets="@../../Styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lms.demofx.Controllers.Dashboard.DashboardController">
+<BorderPane fx:id="dashBoardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="600.0" styleClass="dashboard" stylesheets="@../../Styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lms.demofx.Controllers.Dashboard.DashboardController">
    <left>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="200.0" spacing="30.0" styleClass="navpane">
+            <VBox alignment="CENTER" layoutY="-35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="200.0" spacing="30.0" styleClass="navpane">
                <children>
-                  <Circle fx:id="profilePic" fill="DODGERBLUE" radius="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="profile-pic" />
+                  <Circle fx:id="profilePic" fill="DODGERBLUE" onMouseClicked="#navigateToUpdateProfile" radius="50.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" styleClass="profile-pic" />
                   <Button fx:id="displayButton" mnemonicParsing="false" onAction="#navigateToDisplay" styleClass="navbtn" text="Display" />
                   <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#navigateToDelete" styleClass="navbtn" text="Delete" />
                   <Button fx:id="insertButton" mnemonicParsing="false" onAction="#navigateToInsert" styleClass="navbtn" text="Insert" />
                   <Button fx:id="updateButton" mnemonicParsing="false" onAction="#navigateToUpdate" styleClass="navbtn" text="Update" />
+                  <Button fx:id="logoutButton" mnemonicParsing="false" onAction="#navigateToLogin" styleClass="navbtn" text="Logout" />
                </children>
             </VBox>
          </children>
       </AnchorPane>
    </left>
    <right>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="400.0" BorderPane.alignment="CENTER" />
    </right>
 </BorderPane>
