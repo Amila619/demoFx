@@ -120,23 +120,23 @@ public class DashboardController implements Initializable {
 
     public void setUserId(int id) {
         userId = id;
-        getImageFromDatabase(userId, "src/main/resources/Images/User/dp.jpg");
+        getImageFromDatabase();
     }
 
-    private void getImageFromDatabase(int userId, String outputPath) {
+    protected void getImageFromDatabase() {
         try {
              conn = Database.Conn();
              sql = "SELECT user_dp FROM users WHERE u_id=?";
              ps = conn.prepareStatement(sql);
 
             ps.setInt(1, userId);
-             rs = ps.executeQuery();
+            rs = ps.executeQuery();
 
             if (rs.next()) {
                  is = rs.getBinaryStream("user_dp");
 
                 try {
-                    fos = new FileOutputStream(outputPath);
+                    fos = new FileOutputStream("src/main/resources/Images/User/dp.jpg");
                     byte[] buffer = new byte[1024];
                     int bytesRead;
                     while ((bytesRead = is.read(buffer)) != -1) {

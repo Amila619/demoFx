@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="400.0" styleClass="pane" stylesheets="@../../Styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lms.demofx.Controllers.Dashboard.DeleteController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="400.0" styleClass="pane" stylesheets="@../../Styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lms.demofx.Controllers.Dashboard.DeleteController">
    <children>
       <GridPane alignment="CENTER" layoutX="59.0" layoutY="108.0" prefHeight="44.0" prefWidth="281.0">
          <columnConstraints>
@@ -24,7 +24,7 @@
             <Label fx:id="productIdInputLabel" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="171.0" text="Product Id" />
          </children>
       </GridPane>
-      <Button fx:id="deleteProduct" onAction="#deleteProduct" styleClass="custom-button" layoutX="111.0" layoutY="189.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="177.0" text="Delete" />
+      <Button fx:id="deleteProduct" layoutX="111.0" layoutY="189.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="35.0" prefWidth="177.0" styleClass="custom-button" text="Delete" />
       <Label fx:id="deleteHeading" alignment="CENTER" layoutX="102.0" layoutY="34.0" prefHeight="17.0" prefWidth="195.0" text="Delete Product">
          <font>
             <Font size="24.0" />
