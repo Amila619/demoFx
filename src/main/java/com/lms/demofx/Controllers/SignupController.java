@@ -3,13 +3,16 @@ package com.lms.demofx.Controllers;
 import com.lms.demofx.Services.Database;
 import com.lms.demofx.Utils.CustomUi;
 import com.lms.demofx.Utils.PasswordUtils;
+import com.lms.demofx.Utils.SceneHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
@@ -18,7 +21,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,6 +70,9 @@ public class SignupController implements Initializable {
 
     @FXML
     private Circle userUploadProfilePic;
+
+    @FXML
+    private Label navLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -149,5 +154,14 @@ public class SignupController implements Initializable {
         pswdTextField.clear();
         cpswdTextField.clear();
         userUploadProfilePic.setFill(null);
+    }
+
+    @FXML
+    private void loadLogin(MouseEvent event) throws IOException {
+        FXMLLoader loader = SceneHandler.createLoader("/Fxml/Login.fxml");
+        root = loader.load();
+
+        SceneHandler.switchScene(signupBtn, root, "Login");
+
     }
 }
