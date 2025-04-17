@@ -1,5 +1,7 @@
 package com.lms.demofx.Controllers.Dashboard;
 
+import com.lms.demofx.Controllers.BaseController;
+import com.lms.demofx.Controllers.SignupController;
 import com.lms.demofx.Services.Database;
 import com.lms.demofx.Utils.SceneHandler;
 import javafx.event.ActionEvent;
@@ -15,23 +17,14 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 import javafx.scene.input.MouseEvent;
+
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
 
-public class DashboardController implements Initializable {
-
-    private Parent root;
-    private String sql;
-    private int userId;
-
-    private Connection conn;
-    private PreparedStatement ps;
-    private ResultSet rs;
-    private InputStream is;
-    private FileOutputStream fos;
-
+public class DashboardController extends BaseController {
     @FXML
     private BorderPane dashBoardPane;
 
@@ -55,6 +48,8 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        getImageFromDatabase();
+        setProfilePic(profilePic);
         navigate("/Fxml/Dashboard/Display.fxml");
     }
 
@@ -100,59 +95,5 @@ public class DashboardController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    private void setProfilePic() {
-        try {
-            URL imageUrl = getClass().getResource("/Images/User/dp.jpg");
-
-            if (imageUrl == null) {
-                imageUrl = getClass().getResource("/Images/User/temp.jpg");
-            }
-
-            Image image = new Image(imageUrl.toExternalForm());
-            profilePic.setFill(new ImagePattern(image));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setUserId(int id) {
-        userId = id;
-        getImageFromDatabase();
-    }
-
-    protected void getImageFromDatabase() {
-        try {
-             conn = Database.Conn();
-             sql = "SELECT user_dp FROM users WHERE u_id=?";
-             ps = conn.prepareStatement(sql);
-
-            ps.setInt(1, userId);
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                 is = rs.getBinaryStream("user_dp");
-
-                try {
-                    fos = new FileOutputStream("src/main/resources/Images/User/dp.jpg");
-                    byte[] buffer = new byte[1024];
-                    int bytesRead;
-                    while ((bytesRead = is.read(buffer)) != -1) {
-                        fos.write(buffer, 0, bytesRead);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                is.close();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        setProfilePic();
     }
 }

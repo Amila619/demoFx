@@ -36,7 +36,7 @@
                 <PasswordField fx:id="pswdTextField" layoutX="40.0" layoutY="253.0" prefHeight="25.0" prefWidth="215.0" styleClass="inp-field" />
                 <TextField fx:id="unTextField" layoutX="40.0" layoutY="167.0" prefHeight="25.0" prefWidth="213.0" styleClass="inp-field" />
                 <Button fx:id="loginBtn" layoutX="41.0" layoutY="315.0" mnemonicParsing="false" onAction="#handleLogin" prefHeight="35.0" prefWidth="214.0" styleClass="custom-button" text="Login" textFill="WHITE" />
-            <Label fx:id="navLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="86.0" layoutY="361.0" prefHeight="18.0" prefWidth="118.0" onMouseClicked="#loadSignUp" text="If no account SignUp now" textAlignment="CENTER">
+            <Label fx:id="navLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="86.0" layoutY="361.0" prefHeight="18.0" prefWidth="118.0" onMouseClicked="#handleLoadSignUp" text="If no account SignUp now" textAlignment="CENTER">
                <font>
                   <Font size="10.0" />
                </font>

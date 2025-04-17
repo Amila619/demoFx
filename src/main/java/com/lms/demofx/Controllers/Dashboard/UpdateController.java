@@ -14,13 +14,9 @@ import java.util.ResourceBundle;
 
 public class UpdateController extends DashboardController {
 
-    private String sql, productName;
-    private int id, productQuantity;
+    private String productName;
+    private int productQuantity;
     private double productPrice;
-    private Connection conn;
-    private Statement st;
-    private PreparedStatement ps;
-    private ResultSet rs;
 
     @FXML
     private Label updateHeading;

@@ -16,11 +16,6 @@ import java.util.ResourceBundle;
 
 public class DisplayController extends DashboardController {
 
-    private String sql;
-    private Connection conn;
-    private Statement st;
-    private ResultSet rs;
-
     @FXML
     private TableColumn<?, String> productName;
 
