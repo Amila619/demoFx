@@ -13,6 +13,7 @@ module com.lms.demofx {
     requires java.sql;
     requires jbcrypt;
     requires io.github.cdimascio.dotenv.java;
+    requires java.desktop;
 
 
     opens com.lms.demofx to javafx.fxml;

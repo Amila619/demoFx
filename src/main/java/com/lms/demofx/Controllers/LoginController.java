@@ -63,7 +63,7 @@ public class LoginController implements Initializable {
 
         try {
             conn = Database.Conn();
-            sql = "SELECT u_id, user_password FROM users WHERE email=?";
+            sql = "SELECT u_id, user_password FROM users WHERE user_email=?";
 
             if (username.equals("") || password.equals("")) {
                 CustomUi.popUpErrorMessage("Username and Password are Required", Alert.AlertType.WARNING);
