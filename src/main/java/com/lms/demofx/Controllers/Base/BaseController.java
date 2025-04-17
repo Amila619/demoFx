@@ -1,4 +1,4 @@
-package com.lms.demofx.Controllers;
+package com.lms.demofx.Controllers.Base;
 
 import com.lms.demofx.Services.Database;
 import com.lms.demofx.Utils.SceneHandler;
@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 public class BaseController implements Initializable {
     protected Parent root;
-    protected int userId;
+    private static int userId;
     protected int id;
     protected String sql;
     protected Connection conn;
@@ -37,9 +37,21 @@ public class BaseController implements Initializable {
     protected BufferedImage bi;
 
 
+    @FXML
+    private Circle profilePic;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public static void setUserId(int id) {
+        userId = id;
+    }
+
+    public static int getUserId() {
+        return userId;
     }
 
     public void setProfilePic(Circle proPic) {
@@ -58,30 +70,37 @@ public class BaseController implements Initializable {
         }
     }
 
+    public void setProfilePic(Circle proPic, byte[] imgData) {
+        Image image;
+        try {
+            image = new Image(new ByteArrayInputStream(imgData));
+        }catch (Exception e) {
+            e.printStackTrace();
+            image = new Image(getClass().getResource("/Images/User/temp.jpg").toExternalForm());
+        }
+        proPic.setFill(new ImagePattern(image));
+    }
+
     public void getImageFromDatabase() {
         try {
             conn = Database.Conn();
             sql = "SELECT user_dp FROM users WHERE u_id=?";
             ps = conn.prepareStatement(sql);
 
-            ps.setInt(1, userId);
+            id = BaseController.getUserId();
+
+            ps.setInt(1, id);
             rs = ps.executeQuery();
 
             if (rs.next()) {
-                is = rs.getBinaryStream("user_dp");
-
                 try {
+                    byte[] imageData = rs.getBytes("user_dp");
+                    setProfilePic(profilePic, imageData);
                     fos = new FileOutputStream("src/main/resources/Images/User/dp.jpg");
-                    byte[] buffer = new byte[1024];
-                    int bytesRead;
-                    while ((bytesRead = is.read(buffer)) != -1) {
-                        fos.write(buffer, 0, bytesRead);
-                    }
+                    fos.write(imageData);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
-                is.close();
             }
 
         } catch (Exception e) {
@@ -90,14 +109,14 @@ public class BaseController implements Initializable {
 
     }
 
-    public void saveImage(File selectedFile){
+    public void saveImage(File selectedFile) {
         try {
             bi = ImageIO.read(selectedFile);
             String fileExtension = selectedFile.toString().split("\\.")[1];
             File outputfile = new File("src/main/resources/Images/Uploads/up." + fileExtension);
             ImageIO.write(bi, fileExtension, outputfile);
             is = new FileInputStream(new File("src/main/resources/Images/Uploads/up." + fileExtension));
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -127,9 +146,9 @@ public class BaseController implements Initializable {
     }
 
     public void loadLogin(Node ob) throws IOException {
-        FXMLLoader loader = SceneHandler.createLoader("/Fxml/Signup.fxml");
+        FXMLLoader loader = SceneHandler.createLoader("/Fxml/Login.fxml");
         root = loader.load();
-        SceneHandler.switchScene(ob, root, "Signup");
+        SceneHandler.switchScene(ob, root, "Login");
     }
 
     public void loadDashboard(Node ob) throws IOException {

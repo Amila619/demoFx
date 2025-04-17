@@ -1,5 +1,6 @@
 package com.lms.demofx.Controllers;
 
+import com.lms.demofx.Controllers.Base.BaseController;
 import com.lms.demofx.Services.Database;
 import com.lms.demofx.Utils.CustomUi;
 import com.lms.demofx.Utils.PasswordUtils;
@@ -10,6 +11,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Circle;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -64,15 +66,16 @@ public class SignupController extends BaseController {
         cpassword = cpswdTextField.getText().trim();
 
         try {
-            conn = Database.Conn();
-            sql = "INSERT INTO users (user_password, user_email, user_dp) values(?,?,?)";
 
             if (username.equals("") || password.equals("") || cpassword.equals("")) {
                 CustomUi.popUpErrorMessage("All Fields are Required", Alert.AlertType.WARNING);
             } else if (!password.equals(cpassword)) {
                 CustomUi.popUpErrorMessage("Passwords do not match", Alert.AlertType.WARNING);
             } else {
+                conn = Database.Conn();
+                sql = "INSERT INTO users (user_password, user_email, user_dp) values(?,?,?)";
                 password = PasswordUtils.hashPassword(password);
+                is = new FileInputStream("src/main/resources/Images/Uploads/up.jpg");
 
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, password);
@@ -80,10 +83,10 @@ public class SignupController extends BaseController {
                 ps.setBlob(3, is);
 
                 int rowCount = ps.executeUpdate();
-                if (rowCount > 0){
+                if (rowCount > 0) {
                     clearInputs();
                     CustomUi.popUpErrorMessage("User Added Successfully", Alert.AlertType.INFORMATION);
-                }else{
+                } else {
                     CustomUi.popUpErrorMessage("User Added Failed", Alert.AlertType.ERROR);
                 }
             }
@@ -104,7 +107,7 @@ public class SignupController extends BaseController {
         setProfilePicUpload(userUploadProfilePic);
     }
 
-    private void clearInputs(){
+    private void clearInputs() {
         unTextField.clear();
         pswdTextField.clear();
         cpswdTextField.clear();
@@ -113,7 +116,7 @@ public class SignupController extends BaseController {
 
     @FXML
     private void handleLoadLogin(MouseEvent event) throws IOException {
-        loadSignUp(signupBtn);
+        loadLogin(signupBtn);
     }
 
 }

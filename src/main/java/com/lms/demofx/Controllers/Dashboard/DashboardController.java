@@ -1,27 +1,18 @@
 package com.lms.demofx.Controllers.Dashboard;
 
-import com.lms.demofx.Controllers.BaseController;
-import com.lms.demofx.Controllers.SignupController;
-import com.lms.demofx.Services.Database;
+import com.lms.demofx.Controllers.Base.BaseController;
 import com.lms.demofx.Utils.SceneHandler;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-
 import javafx.scene.input.MouseEvent;
 
-import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
-import java.sql.*;
 import java.util.ResourceBundle;
 
 public class DashboardController extends BaseController {
@@ -41,15 +32,14 @@ public class DashboardController extends BaseController {
     private Button insertButton;
 
     @FXML
-    private Circle profilePic;
+    private Button updateButton;
 
     @FXML
-    private Button updateButton;
+    private Circle profilePic;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         getImageFromDatabase();
-        setProfilePic(profilePic);
         navigate("/Fxml/Dashboard/Display.fxml");
     }
 

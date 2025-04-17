@@ -1,5 +1,6 @@
 package com.lms.demofx.Controllers;
 
+import com.lms.demofx.Controllers.Base.BaseController;
 import com.lms.demofx.Utils.CustomUi;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -69,7 +70,7 @@ public class LoginController extends BaseController {
                     db_hash = rs.getString("user_password");
 
                     if (PasswordUtils.verifyPassword(password, db_hash)) {
-                        userId = db_uid;
+                        BaseController.setUserId(db_uid);
                         loadDashboard(loginBtn);
                     } else {
                         CustomUi.popUpErrorMessage("Invalid Password or Username", Alert.AlertType.ERROR);

@@ -111,7 +111,7 @@ public class UpdateController extends DashboardController {
 
     @FXML
     private void updateProduct(ActionEvent event) {
-        sql = "   UPDATE products SET product_name = ?, product_quantity = ?, product_price = ? WHERE product_id = ?";
+        sql = "UPDATE products SET product_name = ?, product_quantity = ?, product_price = ? WHERE product_id = ?";
 
         if(validateInputs()){
             try {
