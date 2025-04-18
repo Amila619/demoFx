@@ -88,10 +88,8 @@ public class InsertController extends DashboardController {
 
             if (productName.isEmpty()) {
                 CustomUi.popUpErrorMessage("Fields cannot be empty!", "Product Input Error", Alert.AlertType.ERROR);
-                return false;
             }else if (productQuantity <= 0 || productPrice <= 0) {
                 CustomUi.popUpErrorMessage("Quantity/Price must be > 0", "Product Input Error", Alert.AlertType.ERROR);
-                return false;
             }
         } catch (NumberFormatException e) {
             CustomUi.popUpErrorMessage("Quantity/Price must be Number", "Product Input Error", Alert.AlertType.ERROR);

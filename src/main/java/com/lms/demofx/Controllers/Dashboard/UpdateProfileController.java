@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
 
 public class UpdateProfileController extends DashboardController {
 
-    private String username, npassword, cpassword;
+    private String username, npassword, cpassword, upassword;
     @FXML
     private Label cpswdLabel;
 
@@ -63,28 +63,29 @@ public class UpdateProfileController extends DashboardController {
         npassword = npswdTextField.getText().trim();
         cpassword = cpswdTextField.getText().trim();
         try{
-            if (username.isEmpty() || npassword.isEmpty() || cpassword.isEmpty()) {
+            if (username.isEmpty()) {
                 CustomUi.popUpErrorMessage("Fields cannot be empty!", "Update Error", Alert.AlertType.ERROR);
-            }else if(!npassword.equals(cpassword)){
-                CustomUi.popUpErrorMessage("Passwords do not match", "Update Error", Alert.AlertType.WARNING);
-            }else {
-                conn = Database.Conn();
-                sql = "UPDATE users SET user_email = ?, user_password = ?, user_dp = ? WHERE u_id = ?";
-                npassword = PasswordUtils.hashPassword(npassword);
-                is = new FileInputStream("src/main/resources/Images/Uploads/up.jpg");
+            }else{
+                if(!npassword.equals(cpassword)) {
+                    CustomUi.popUpErrorMessage("Passwords do not match", "Update Error", Alert.AlertType.WARNING);
+                }else {
+                    conn = Database.Conn();
+                    sql = "UPDATE users SET user_email = ?, user_password = ?, user_dp = ? WHERE u_id = ?";
+                    npassword = npassword.isEmpty() ? upassword : PasswordUtils.hashPassword(npassword);
 
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, username);
-                ps.setString(2, npassword);
-                ps.setBlob(3, is);
-                ps.setInt(4, BaseController.getUserId());
+                    ps = conn.prepareStatement(sql);
+                    ps.setString(1, username);
+                    ps.setString(2, npassword);
+                    ps.setBlob(3, is);
+                    ps.setInt(4, BaseController.getUserId());
 
-                int rowCount = ps.executeUpdate();
-                if (rowCount > 0) {
-                    CustomUi.popUpErrorMessage("User Updated Successfully", "Update Success", Alert.AlertType.INFORMATION);
-                    loadDashboard(signupBtn);
-                } else {
-                    CustomUi.popUpErrorMessage("User Updated Failed", "Update Failed", Alert.AlertType.ERROR);
+                    int rowCount = ps.executeUpdate();
+                    if (rowCount > 0) {
+                        CustomUi.popUpErrorMessage("User Updated Successfully", "Update Success", Alert.AlertType.INFORMATION);
+                        loadDashboard(signupBtn);
+                    } else {
+                        CustomUi.popUpErrorMessage("User Updated Failed", "Update Failed", Alert.AlertType.ERROR);
+                    }
                 }
             }
         }catch (Exception e){
@@ -101,13 +102,15 @@ public class UpdateProfileController extends DashboardController {
     private void updateInputFields() {
         try{
                 conn = Database.Conn();
-                sql = "SELECT user_email, user_dp FROM users WHERE u_id = ?";
+                sql = "SELECT user_email, user_password, user_dp FROM users WHERE u_id = ?";
 
                 ps = conn.prepareStatement(sql);
                 ps.setInt(1, BaseController.getUserId());
                 rs = ps.executeQuery();
                 if (rs.next()) {
                     unTextField.setText(rs.getString("user_email"));
+                    upassword = rs.getString("user_password");
+                    is = rs.getBinaryStream("user_dp");
                     byte[] imgData = rs.getBytes("user_dp");
                     Image image = new Image(new ByteArrayInputStream(imgData));
                     userUploadProfilePic.setFill(new ImagePattern(image));
