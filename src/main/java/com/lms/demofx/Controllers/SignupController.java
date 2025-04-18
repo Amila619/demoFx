@@ -12,7 +12,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -33,6 +32,12 @@ public class SignupController extends BaseController {
 
     @FXML
     private Label emailLabel;
+
+    @FXML
+    private Label uimageLabel;
+
+    @FXML
+    private Label navLabel;
 
     @FXML
     private Label headLogin;

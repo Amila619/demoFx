@@ -21,13 +21,13 @@
          </rowConstraints>
          <children>
             <ComboBox fx:id="productIdInput" prefWidth="150.0" GridPane.columnIndex="1" />
-            <Label fx:id="productIdInputLabel" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="171.0" text="Product Id" />
+            <Label fx:id="productIdInputLabel" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="171.0" styleClass="font-color" text="Product Id" />
          </children>
       </GridPane>
       <Button fx:id="deleteProduct" layoutX="111.0" layoutY="189.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="35.0" prefWidth="177.0" styleClass="custom-button" text="Delete" />
-      <Label fx:id="deleteHeading" alignment="CENTER" layoutX="102.0" layoutY="34.0" prefHeight="17.0" prefWidth="195.0" text="Delete Product">
+      <Label fx:id="deleteHeading" alignment="CENTER" layoutX="88.0" layoutY="38.0" prefHeight="29.0" prefWidth="217.0" styleClass="font-color" text="Delete Product">
          <font>
-            <Font size="24.0" />
+            <Font name="Cascadia Code Regular" size="24.0" />
          </font>
       </Label>
    </children>
