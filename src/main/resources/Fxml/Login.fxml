@@ -26,7 +26,7 @@
     <right>
         <AnchorPane prefHeight="400.0" prefWidth="332.0" BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="headLogin" layoutX="99.0" layoutY="44.0" prefHeight="53.0" prefWidth="107.0" style="-fx-background-color: #ff4e6;" text="Login" textFill="#793333">
+                <Label fx:id="headLogin" layoutX="99.0" layoutY="44.0" prefHeight="53.0" prefWidth="107.0" text="Login" textFill="#793333">
                     <font>
                         <Font name="Cascadia Code Regular" size="36.0" />
                     </font>

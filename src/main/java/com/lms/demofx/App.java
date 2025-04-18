@@ -23,4 +23,12 @@ public class App extends Application {
          e.printStackTrace();
      }
     }
+
+    @Override
+    public void stop() throws Exception {
+        Thread.sleep(500);
+        BaseController.emptyDirectoryFiles("src/main/resources/Images/Uploads/");
+        BaseController.emptyDirectoryFiles("src/main/resources/Images/User/");
+        super.stop();
+    }
 }

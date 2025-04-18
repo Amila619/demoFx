@@ -76,7 +76,6 @@ public class SignupController extends BaseController {
                 conn = Database.Conn();
                 sql = "INSERT INTO users (user_password, user_email, user_dp) values(?,?,?)";
                 password = PasswordUtils.hashPassword(password);
-                is = new FileInputStream("src/main/resources/Images/Uploads/up.jpg");
 
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, password);
@@ -87,6 +86,7 @@ public class SignupController extends BaseController {
                 if (rowCount > 0) {
                     clearInputs();
                     CustomUi.popUpErrorMessage("User Added Successfully", "Signup Successful", Alert.AlertType.INFORMATION);
+                    loadLogin(signupBtn);
                 } else {
                     CustomUi.popUpErrorMessage("User Added Failed", "Signup Failed", Alert.AlertType.ERROR);
                 }
