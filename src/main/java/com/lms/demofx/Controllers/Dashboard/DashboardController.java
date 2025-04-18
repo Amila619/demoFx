@@ -35,11 +35,11 @@ public class DashboardController extends BaseController {
     private Button updateButton;
 
     @FXML
-    private Circle profilePic;
+    protected Circle profilePic;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getImageFromDatabase();
+        getImageFromDatabase(profilePic);
         navigate("/Fxml/Dashboard/Display.fxml");
     }
 

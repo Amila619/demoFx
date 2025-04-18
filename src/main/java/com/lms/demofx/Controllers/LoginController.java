@@ -59,7 +59,7 @@ public class LoginController extends BaseController {
             sql = "SELECT u_id, user_password FROM users WHERE user_email=?";
 
             if (username.equals("") || password.equals("")) {
-                CustomUi.popUpErrorMessage("Username and Password are Required", Alert.AlertType.WARNING);
+                CustomUi.popUpErrorMessage("Username and Password are Required", "Login Error", Alert.AlertType.WARNING);
             } else {
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, username);
@@ -73,10 +73,10 @@ public class LoginController extends BaseController {
                         BaseController.setUserId(db_uid);
                         loadDashboard(loginBtn);
                     } else {
-                        CustomUi.popUpErrorMessage("Invalid Password or Username", Alert.AlertType.ERROR);
+                        CustomUi.popUpErrorMessage("Invalid Password or Username", "Login Error",  Alert.AlertType.ERROR);
                     }
                 } else {
-                    CustomUi.popUpErrorMessage("User Not Found", Alert.AlertType.ERROR);
+                    CustomUi.popUpErrorMessage("User Not Found", "Login Error",  Alert.AlertType.ERROR);
                 }
             }
 

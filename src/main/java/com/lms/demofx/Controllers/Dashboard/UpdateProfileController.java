@@ -11,8 +11,11 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class UpdateProfileController extends DashboardController {
@@ -50,20 +53,20 @@ public class UpdateProfileController extends DashboardController {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setProfilePic(userUploadProfilePic);
+        updateInputFields();
     }
 
 
     @FXML
-    private void handleUpdate(ActionEvent event) {
+    private void handleUpdate(ActionEvent event) throws IOException {
         username = unTextField.getText().trim();
         npassword = npswdTextField.getText().trim();
         cpassword = cpswdTextField.getText().trim();
         try{
             if (username.isEmpty() || npassword.isEmpty() || cpassword.isEmpty()) {
-                CustomUi.popUpErrorMessage("Fields cannot be empty!", Alert.AlertType.ERROR);
+                CustomUi.popUpErrorMessage("Fields cannot be empty!", "Update Error", Alert.AlertType.ERROR);
             }else if(!npassword.equals(cpassword)){
-                CustomUi.popUpErrorMessage("Passwords do not match", Alert.AlertType.WARNING);
+                CustomUi.popUpErrorMessage("Passwords do not match", "Update Error", Alert.AlertType.WARNING);
             }else {
                 conn = Database.Conn();
                 sql = "UPDATE users SET user_email = ?, user_password = ?, user_dp = ? WHERE u_id = ?";
@@ -78,16 +81,47 @@ public class UpdateProfileController extends DashboardController {
 
                 int rowCount = ps.executeUpdate();
                 if (rowCount > 0) {
-                    clearInputs();
-                    CustomUi.popUpErrorMessage("User Updated Successfully", Alert.AlertType.INFORMATION);
+                    CustomUi.popUpErrorMessage("User Updated Successfully", "Update Success", Alert.AlertType.INFORMATION);
+                    loadDashboard(signupBtn);
                 } else {
-                    CustomUi.popUpErrorMessage("User Updated Failed", Alert.AlertType.ERROR);
+                    CustomUi.popUpErrorMessage("User Updated Failed", "Update Failed", Alert.AlertType.ERROR);
                 }
             }
         }catch (Exception e){
             e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println("Error in closing the Connection..."+ e.getMessage());
+            }
         }
-        getImageFromDatabase();
+    }
+
+    private void updateInputFields() {
+        try{
+                conn = Database.Conn();
+                sql = "SELECT user_email, user_dp FROM users WHERE u_id = ?";
+
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, BaseController.getUserId());
+                rs = ps.executeQuery();
+                if (rs.next()) {
+                    unTextField.setText(rs.getString("user_email"));
+                    byte[] imgData = rs.getBytes("user_dp");
+                    Image image = new Image(new ByteArrayInputStream(imgData));
+                    userUploadProfilePic.setFill(new ImagePattern(image));
+                }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                System.out.println("Error in closing the Connection..."+ e.getMessage());
+            }
+        }
     }
 
     @FXML
@@ -95,9 +129,5 @@ public class UpdateProfileController extends DashboardController {
         setProfilePicUpload(userUploadProfilePic);
     }
 
-    private void clearInputs(){
-        unTextField.setText("");
-        cpswdTextField.setText("");
-        npswdTextField.setText("");
-    }
+
 }

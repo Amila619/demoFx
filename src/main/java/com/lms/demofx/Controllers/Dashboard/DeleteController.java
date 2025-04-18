@@ -47,10 +47,10 @@ public class DeleteController extends DashboardController {
 
             int rowCount = ps.executeUpdate();
             if(rowCount>0) {
-                CustomUi.popUpErrorMessage("Product deleted with ID " + id + " Successfully", Alert.AlertType.INFORMATION);
+                CustomUi.popUpErrorMessage("Product deleted with ID " + id + " Successfully", "Delete Success", Alert.AlertType.INFORMATION);
                 productIdInput.setValue(0);
             }else
-                CustomUi.popUpErrorMessage("Product Deletion Failed", Alert.AlertType.ERROR);
+                CustomUi.popUpErrorMessage("Product Deletion Failed", "Delete Failed", Alert.AlertType.ERROR);
         } catch (SQLException e) {
             System.out.println("Error in delete a record..."+e.getMessage());
         }finally {

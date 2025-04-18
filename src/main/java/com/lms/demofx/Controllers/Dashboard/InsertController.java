@@ -64,9 +64,9 @@ public class InsertController extends DashboardController {
                 int rowCount = ps.executeUpdate();
                 if (rowCount > 0){
                     clearInputs();
-                    CustomUi.popUpErrorMessage("Product Added Successfully", Alert.AlertType.INFORMATION);
+                    CustomUi.popUpErrorMessage("Product Added Successfully", "Added Success", Alert.AlertType.INFORMATION);
                 }else{
-                    CustomUi.popUpErrorMessage("Product Added Failed", Alert.AlertType.ERROR);
+                    CustomUi.popUpErrorMessage("Product Added Failed", "Added Failed", Alert.AlertType.ERROR);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -87,15 +87,15 @@ public class InsertController extends DashboardController {
             productPrice = Double.parseDouble(productPriceInput.getText().trim());
 
             if (productName.isEmpty()) {
-                CustomUi.popUpErrorMessage("Fields cannot be empty!", Alert.AlertType.ERROR);
+                CustomUi.popUpErrorMessage("Fields cannot be empty!", "Product Input Error", Alert.AlertType.ERROR);
                 return false;
             }
             if (productQuantity <= 0 || productPrice <= 0) {
-                CustomUi.popUpErrorMessage("Quantity/Price must be > 0", Alert.AlertType.ERROR);
+                CustomUi.popUpErrorMessage("Quantity/Price must be > 0", "Product Input Error", Alert.AlertType.ERROR);
                 return false;
             }
         } catch (NumberFormatException e) {
-            CustomUi.popUpErrorMessage("Quantity/Price must be Number", Alert.AlertType.ERROR);
+            CustomUi.popUpErrorMessage("Quantity/Price must be Number", "Product Input Error", Alert.AlertType.ERROR);
             return false;
         }
 

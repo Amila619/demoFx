@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 import java.io.FileInputStream;
@@ -68,9 +69,9 @@ public class SignupController extends BaseController {
         try {
 
             if (username.equals("") || password.equals("") || cpassword.equals("")) {
-                CustomUi.popUpErrorMessage("All Fields are Required", Alert.AlertType.WARNING);
+                CustomUi.popUpErrorMessage("All Fields are Required", "Signup Error",  Alert.AlertType.WARNING);
             } else if (!password.equals(cpassword)) {
-                CustomUi.popUpErrorMessage("Passwords do not match", Alert.AlertType.WARNING);
+                CustomUi.popUpErrorMessage("Passwords do not match", "Signup Error", Alert.AlertType.WARNING);
             } else {
                 conn = Database.Conn();
                 sql = "INSERT INTO users (user_password, user_email, user_dp) values(?,?,?)";
@@ -85,9 +86,9 @@ public class SignupController extends BaseController {
                 int rowCount = ps.executeUpdate();
                 if (rowCount > 0) {
                     clearInputs();
-                    CustomUi.popUpErrorMessage("User Added Successfully", Alert.AlertType.INFORMATION);
+                    CustomUi.popUpErrorMessage("User Added Successfully", "Signup Successful", Alert.AlertType.INFORMATION);
                 } else {
-                    CustomUi.popUpErrorMessage("User Added Failed", Alert.AlertType.ERROR);
+                    CustomUi.popUpErrorMessage("User Added Failed", "Signup Failed", Alert.AlertType.ERROR);
                 }
             }
 
@@ -111,7 +112,7 @@ public class SignupController extends BaseController {
         unTextField.clear();
         pswdTextField.clear();
         cpswdTextField.clear();
-        userUploadProfilePic.setFill(null);
+        userUploadProfilePic.setFill(Color.DODGERBLUE);
     }
 
     @FXML

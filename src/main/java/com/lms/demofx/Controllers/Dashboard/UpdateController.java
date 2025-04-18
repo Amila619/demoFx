@@ -65,7 +65,7 @@ public class UpdateController extends DashboardController {
             ps.setInt(1, id);
             rs = ps.executeQuery();
 
-            while(rs.next()) {
+            if(rs.next()) {
                 productNameInput.setText(rs.getString("product_name"));
                 productQuantityInput.setText(rs.getString("product_quantity"));
                 productPriceInput.setText(rs.getString("product_price"));
@@ -126,9 +126,9 @@ public class UpdateController extends DashboardController {
                 int rowCount = ps.executeUpdate();
                 if (rowCount > 0){
                     clearInputs();
-                    CustomUi.popUpErrorMessage("Product with ID " + id + " Successfully Updated", Alert.AlertType.INFORMATION);
+                    CustomUi.popUpErrorMessage("Product with ID " + id + " Successfully Updated", "Update Success", Alert.AlertType.INFORMATION);
                 }else{
-                    CustomUi.popUpErrorMessage("Product Update Failed", Alert.AlertType.ERROR);
+                    CustomUi.popUpErrorMessage("Product Update Failed", "Update Failed", Alert.AlertType.ERROR);
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -149,15 +149,15 @@ public class UpdateController extends DashboardController {
             productPrice = Double.parseDouble(productPriceInput.getText().trim());
 
             if (productName.isEmpty()) {
-                CustomUi.popUpErrorMessage("Fields cannot be empty!", Alert.AlertType.ERROR);
+                CustomUi.popUpErrorMessage("Fields cannot be empty!", "Validate Error", Alert.AlertType.ERROR);
                 return false;
             }
             if (productQuantity <= 0 || productPrice <= 0) {
-                CustomUi.popUpErrorMessage("Quantity/Price must be > 0", Alert.AlertType.ERROR);
+                CustomUi.popUpErrorMessage("Quantity/Price must be > 0", "Validate Error", Alert.AlertType.ERROR);
                 return false;
             }
         } catch (NumberFormatException e) {
-            CustomUi.popUpErrorMessage("Quantity/Price must be Number", Alert.AlertType.ERROR);
+            CustomUi.popUpErrorMessage("Quantity/Price must be Number", "Validate Error", Alert.AlertType.ERROR);
             return false;
         }
 

@@ -37,10 +37,6 @@ public class BaseController implements Initializable {
     protected BufferedImage bi;
 
 
-    @FXML
-    private Circle profilePic;
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -81,7 +77,7 @@ public class BaseController implements Initializable {
         proPic.setFill(new ImagePattern(image));
     }
 
-    public void getImageFromDatabase() {
+    public void getImageFromDatabase(Circle proPic) {
         try {
             conn = Database.Conn();
             sql = "SELECT user_dp FROM users WHERE u_id=?";
@@ -95,7 +91,7 @@ public class BaseController implements Initializable {
             if (rs.next()) {
                 try {
                     byte[] imageData = rs.getBytes("user_dp");
-                    setProfilePic(profilePic, imageData);
+                    setProfilePic(proPic, imageData);
                     fos = new FileOutputStream("src/main/resources/Images/User/dp.jpg");
                     fos.write(imageData);
                 } catch (Exception e) {
