@@ -3,15 +3,18 @@ package com.lms.demofx.Controllers.Base;
 import com.lms.demofx.Services.Database;
 import com.lms.demofx.Utils.SceneHandler;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.stage.FileChooser;
+import javafx.util.Duration;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -158,5 +161,13 @@ public class BaseController implements Initializable {
         FXMLLoader loader = SceneHandler.createLoader("/Fxml/Dashboard/Dashboard.fxml");
         root = loader.load();
         SceneHandler.switchScene(ob, root, "Dashboard");
+    }
+
+    @FXML
+    private void highlightError(TextField field) {
+        field.setStyle("-fx-border-color: red;");
+        PauseTransition pause = new PauseTransition(Duration.seconds(3));
+        pause.setOnFinished(e -> field.setStyle(""));
+        pause.play();
     }
 }

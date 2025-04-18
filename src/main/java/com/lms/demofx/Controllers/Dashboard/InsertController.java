@@ -81,18 +81,23 @@ public class InsertController extends DashboardController {
     }
 
     private boolean validateInputs() {
-        try {
             productName = productNameInput.getText().trim();
-            productQuantity = Integer.parseInt(productQuantityInput.getText().trim());
-            productPrice = Double.parseDouble(productPriceInput.getText().trim());
 
             if (productName.isEmpty()) {
-                CustomUi.popUpErrorMessage("Fields cannot be empty!", "Product Input Error", Alert.AlertType.ERROR);
-            }else if (productQuantity <= 0 || productPrice <= 0) {
-                CustomUi.popUpErrorMessage("Quantity/Price must be > 0", "Product Input Error", Alert.AlertType.ERROR);
+                CustomUi.popUpErrorMessage("Product name cannot be empty!", "Product Input Error", Alert.AlertType.ERROR);
+                return false;
             }
+
+        try {
+            productQuantity = Integer.parseInt(productQuantityInput.getText().trim());
+            productPrice = Double.parseDouble(productPriceInput.getText().trim());
         } catch (NumberFormatException e) {
             CustomUi.popUpErrorMessage("Quantity/Price must be Number", "Product Input Error", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        if (productQuantity <= 0 || productPrice <= 0) {
+            CustomUi.popUpErrorMessage("Quantity/Price must be > 0", "Product Input Error", Alert.AlertType.ERROR);
             return false;
         }
 

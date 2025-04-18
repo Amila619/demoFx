@@ -143,21 +143,23 @@ public class UpdateController extends DashboardController {
     }
 
     private boolean validateInputs() {
+        productName = productNameInput.getText().trim();
+
+        if (productName.isEmpty()) {
+            CustomUi.popUpErrorMessage("Product name cannot be empty!", "Product Input Error", Alert.AlertType.ERROR);
+            return false;
+        }
+
         try {
-            productName = productNameInput.getText().trim();
             productQuantity = Integer.parseInt(productQuantityInput.getText().trim());
             productPrice = Double.parseDouble(productPriceInput.getText().trim());
-
-            if (productName.isEmpty()) {
-                CustomUi.popUpErrorMessage("Fields cannot be empty!", "Validate Error", Alert.AlertType.ERROR);
-                return false;
-            }
-            if (productQuantity <= 0 || productPrice <= 0) {
-                CustomUi.popUpErrorMessage("Quantity/Price must be > 0", "Validate Error", Alert.AlertType.ERROR);
-                return false;
-            }
         } catch (NumberFormatException e) {
-            CustomUi.popUpErrorMessage("Quantity/Price must be Number", "Validate Error", Alert.AlertType.ERROR);
+            CustomUi.popUpErrorMessage("Quantity/Price must be Number", "Product Input Error", Alert.AlertType.ERROR);
+            return false;
+        }
+
+        if (productQuantity <= 0 || productPrice <= 0) {
+            CustomUi.popUpErrorMessage("Quantity/Price must be > 0", "Product Input Error", Alert.AlertType.ERROR);
             return false;
         }
 
