@@ -1,10 +1,12 @@
 package com.lms.demofx;
 
+import com.lms.demofx.Controllers.Base.BaseController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class App extends Application {
     @Override
@@ -20,5 +22,13 @@ public class App extends Application {
          System.out.println("error : " + e + "\nerror-message: " + e.getMessage());
          e.printStackTrace();
      }
+    }
+
+    @Override
+    public void stop() throws Exception {
+        Thread.sleep(500);
+        BaseController.emptyDirectoryFiles("src/main/resources/Images/Uploads/");
+        BaseController.emptyDirectoryFiles("src/main/resources/Images/User/");
+        super.stop();
     }
 }

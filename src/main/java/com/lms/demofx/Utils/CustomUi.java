@@ -4,9 +4,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.DialogPane;
 
 public class CustomUi {
-    public static void popUpErrorMessage(String error, Alert.AlertType alertType) {
+    public static void popUpErrorMessage(String error, String title, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
-        alert.setTitle("Login Error");
+        alert.setTitle(title);
         alert.setHeaderText(error);
 
         // Load custom CSS
