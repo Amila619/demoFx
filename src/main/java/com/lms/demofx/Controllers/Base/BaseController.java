@@ -75,17 +75,13 @@ public class BaseController implements Initializable {
             sql = "SELECT user_dp FROM users WHERE u_id=?";
             ps = conn.prepareStatement(sql);
 
-            id = BaseController.getUserId();
-
-            ps.setInt(1, id);
+            ps.setInt(1, BaseController.getUserId());
             rs = ps.executeQuery();
 
             if (rs.next()) {
                 try {
                     byte[] imageData = rs.getBytes("user_dp");
                     setProfilePic(proPic, imageData);
-                    fos = new FileOutputStream("src/main/resources/Images/User/dp.jpg");
-                    fos.write(imageData);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
