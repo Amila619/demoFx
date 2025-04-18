@@ -70,11 +70,7 @@ public class DashboardController extends BaseController {
 
     @FXML
     void navigateToLogin(ActionEvent event) throws IOException {
-        FXMLLoader loader = SceneHandler.createLoader("/Fxml/Login.fxml");
-        root = loader.load();
-
-        SceneHandler.switchScene(logoutButton, root, "Login");
-        // delete all images inside of user directory
+        loadLogin(logoutButton);
     }
 
     @FXML

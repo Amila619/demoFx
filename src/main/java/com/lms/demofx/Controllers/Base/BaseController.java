@@ -17,11 +17,15 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.Collections;
 import java.util.ResourceBundle;
+import java.util.stream.Stream;
 
 public class BaseController implements Initializable {
     protected Parent root;
@@ -50,29 +54,14 @@ public class BaseController implements Initializable {
         return userId;
     }
 
-    public void setProfilePic(Circle proPic) {
-        try {
-            URL imageUrl = getClass().getResource("/Images/User/dp.jpg");
-
-            if (imageUrl == null) {
-                imageUrl = getClass().getResource("/Images/User/temp.jpg");
-            }
-
-            Image image = new Image(imageUrl.toExternalForm());
-            proPic.setFill(new ImagePattern(image));
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public void setProfilePic(Circle proPic, byte[] imgData) {
         Image image;
         try {
             image = new Image(new ByteArrayInputStream(imgData));
-        }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-            image = new Image(getClass().getResource("/Images/User/temp.jpg").toExternalForm());
+            image = new Image(getClass().getResource("/Images/temp.jpg").toExternalForm());
         }
         proPic.setFill(new ImagePattern(image));
     }
@@ -134,6 +123,24 @@ public class BaseController implements Initializable {
         }
     }
 
+    public static void emptyDirectoryFiles(String path_) {
+        Path rootDir = Path.of(path_);
+
+        try (Stream<Path> files = Files.walk(rootDir)) {
+            files
+                    .sorted(Collections.reverseOrder())
+                    .filter(path -> !path.equals(rootDir))
+                    .forEach(path -> {
+                        try {
+                            Files.delete(path);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void loadSignUp(Node ob) throws IOException {
         FXMLLoader loader = SceneHandler.createLoader("/Fxml/Signup.fxml");
@@ -152,5 +159,4 @@ public class BaseController implements Initializable {
         root = loader.load();
         SceneHandler.switchScene(ob, root, "Dashboard");
     }
-
 }
