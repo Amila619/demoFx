@@ -16,9 +16,9 @@
             <TableColumn fx:id="productPrice" prefWidth="89.3333740234375" text="p_price" />
         </columns>
       </TableView>
-      <Label fx:id="displayHeading" alignment="CENTER" layoutX="102.0" layoutY="32.0" prefHeight="17.0" prefWidth="195.0" text="Products">
+      <Label fx:id="displayHeading" alignment="CENTER" layoutX="102.0" layoutY="32.0" prefHeight="17.0" prefWidth="195.0" styleClass="font-color" text="Products">
          <font>
-            <Font size="24.0" />
+            <Font name="Cascadia Code Regular" size="24.0" />
          </font>
       </Label>
    </children>

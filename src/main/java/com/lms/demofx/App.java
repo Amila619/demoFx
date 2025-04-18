@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 public class App extends Application {
     @Override
@@ -28,7 +27,6 @@ public class App extends Application {
     public void stop() throws Exception {
         Thread.sleep(500);
         BaseController.emptyDirectoryFiles("src/main/resources/Images/Uploads/");
-        BaseController.emptyDirectoryFiles("src/main/resources/Images/User/");
         super.stop();
     }
 }

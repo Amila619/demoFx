@@ -2,6 +2,7 @@ package com.lms.demofx.Controllers;
 
 import com.lms.demofx.Controllers.Base.BaseController;
 import com.lms.demofx.Utils.CustomUi;
+import com.lms.demofx.Utils.ValidationUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
@@ -60,7 +61,10 @@ public class LoginController extends BaseController {
 
             if (username.equals("") || password.equals("")) {
                 CustomUi.popUpErrorMessage("Username and Password are Required", "Login Error", Alert.AlertType.WARNING);
+            }else if (!ValidationUtils.validateEmail(username)) {
+                CustomUi.popUpErrorMessage("Enter a proper Email Address", "Login Error", Alert.AlertType.WARNING);
             } else {
+
                 ps = conn.prepareStatement(sql);
                 ps.setString(1, username);
                 rs = ps.executeQuery();

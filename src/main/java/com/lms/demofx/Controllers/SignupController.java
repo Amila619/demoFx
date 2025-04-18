@@ -4,6 +4,7 @@ import com.lms.demofx.Controllers.Base.BaseController;
 import com.lms.demofx.Services.Database;
 import com.lms.demofx.Utils.CustomUi;
 import com.lms.demofx.Utils.PasswordUtils;
+import com.lms.demofx.Utils.ValidationUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -12,7 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -33,6 +33,12 @@ public class SignupController extends BaseController {
 
     @FXML
     private Label emailLabel;
+
+    @FXML
+    private Label uimageLabel;
+
+    @FXML
+    private Label navLabel;
 
     @FXML
     private Label headLogin;
@@ -69,7 +75,9 @@ public class SignupController extends BaseController {
         try {
 
             if (username.equals("") || password.equals("") || cpassword.equals("")) {
-                CustomUi.popUpErrorMessage("All Fields are Required", "Signup Error",  Alert.AlertType.WARNING);
+                CustomUi.popUpErrorMessage("All Fields are Required", "Signup Error", Alert.AlertType.WARNING);
+            } else if (!ValidationUtils.validateEmail(username)) {
+                CustomUi.popUpErrorMessage("Enter a proper Email Address", "Login Error", Alert.AlertType.WARNING);
             } else if (!password.equals(cpassword)) {
                 CustomUi.popUpErrorMessage("Passwords do not match", "Signup Error", Alert.AlertType.WARNING);
             } else {

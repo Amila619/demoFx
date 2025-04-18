@@ -18,6 +18,6 @@
       <Label fx:id="cpswdLabel" layoutX="95.0" layoutY="313.0" prefHeight="17.0" prefWidth="99.0" text="Confirm Password" textFill="#793333" />
       <Label fx:id="uimageLabel" layoutX="91.0" layoutY="25.0" prefHeight="17.0" prefWidth="67.0" text="User Image" textFill="#793333" />
       <Circle fx:id="userUploadProfilePic" fill="DODGERBLUE" layoutX="147.0" layoutY="108.0" radius="54.0" stroke="BLACK" strokeType="INSIDE" />
-      <Button fx:id="fileUploadButton" layoutX="233.0" layoutY="96.0" mnemonicParsing="false" onAction="#handleProfilePicUpload" text="File" />
+      <Button fx:id="fileUploadButton" styleClass="custom-button" layoutX="233.0" layoutY="96.0" mnemonicParsing="false" onAction="#handleProfilePicUpload" text="File" />
    </children>
 </AnchorPane>

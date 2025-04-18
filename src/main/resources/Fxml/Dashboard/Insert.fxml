@@ -22,18 +22,18 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label fx:id="productNameInputLabel" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="171.0" text="Product Name" />
+            <Label fx:id="productNameInputLabel" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="171.0" styleClass="font-color" text="Product Name" />
             <TextField fx:id="productNameInput" prefHeight="25.0" prefWidth="105.0" GridPane.columnIndex="1" />
             <TextField fx:id="productQuantityInput" prefHeight="25.0" prefWidth="105.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="productPriceInput" prefHeight="25.0" prefWidth="105.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label fx:id="productQuantityInputLabel" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="160.0" text="Product Quantity" GridPane.rowIndex="1" />
-            <Label fx:id="productPriceInputLabel" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="147.0" text="Product Price" GridPane.rowIndex="2" />
+            <Label fx:id="productQuantityInputLabel" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="160.0" styleClass="font-color" text="Product Quantity" GridPane.rowIndex="1" />
+            <Label fx:id="productPriceInputLabel" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="17.0" prefWidth="147.0" styleClass="font-color" text="Product Price" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <Button fx:id="addProduct" layoutX="111.0" layoutY="296.0" mnemonicParsing="false" onAction="#insertProduct" prefHeight="35.0" prefWidth="177.0" styleClass="custom-button" text="Add" />
-      <Label fx:id="insertHeading" alignment="CENTER" layoutX="102.0" layoutY="34.0" prefHeight="17.0" prefWidth="195.0" text="Insert Product">
+      <Label fx:id="insertHeading" alignment="CENTER" layoutX="92.0" layoutY="34.0" prefHeight="29.0" prefWidth="215.0" styleClass="font-color" text="Insert Product">
          <font>
-            <Font size="24.0" />
+            <Font name="Cascadia Code Regular" size="24.0" />
          </font>
       </Label>
    </children>

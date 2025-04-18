@@ -8,12 +8,25 @@
     -fx-background-color: #793333;
     -fx-background-radius: 24px;
     -fx-text-fill: white;
-    -fx-cursor: hand; /* JavaFX uses "hand" instead of CSS's "pointer" */
+    -fx-cursor: hand;
 }
 
 .custom-button:hover {
-    -fx-background-color: #9a5252; /* Lighter/darker shade for hover */
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.2, 0, 1); /* Optional subtle shadow */
+    -fx-background-color: #9a5252;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0.2, 0, 1);
+}
+
+.font-color {
+    -fx-text-fill: #793333;
+}
+
+.nav-label {
+
+}
+
+.nav-label:hover {
+    -fx-cursor: hand;
+    -fx-text-fill: #9a5252;
 }
 
 .dialog-pane {
@@ -75,7 +88,6 @@
 }
 
 .pane {
-    /*-fx-background-color: rgba(82, 86, 154, 0.4);*/
     -fx-background-color: #FFFFFF;
 }
 
@@ -85,7 +97,7 @@
 }
 
 .profile-pic:hover {
-    -fx-effect: dropshadow(three-pass-box, rgba(71, 118, 230, 0.4), 20, 0.5, 0, 6);
+    -fx-effect: dropshadow(three-pass-box, rgba(172, 54, 54, 0.3), 20, 0.5, 0, 6);
     -fx-scale-x: 1.03;
     -fx-scale-y: 1.03;
 }

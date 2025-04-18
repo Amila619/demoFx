@@ -14,7 +14,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="520.0" stylesheets="@../Styles/styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lms.demofx.Controllers.SignupController">
     <left>
-        <AnchorPane prefHeight="200.0" prefWidth="228.0" style="-fx-background-color: #FFFFFF;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="200.0" prefWidth="228.0" styleClass="pane" BorderPane.alignment="CENTER">
             <children>
                 <ImageView fx:id="BrandingImageView" fitHeight="301.0" fitWidth="230.0" layoutX="7.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -27,7 +27,7 @@
    <center>
         <AnchorPane prefHeight="400.0" prefWidth="332.0" BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="headLogin" layoutX="81.0" layoutY="45.0" prefHeight="53.0" prefWidth="133.0" style="-fx-background-color: #ff4e6;" text="SignUp" textFill="#793333">
+                <Label fx:id="headLogin" layoutX="81.0" layoutY="45.0" prefHeight="53.0" prefWidth="133.0" styleClass="font-color" text="SignUp" textFill="#793333">
                     <font>
                         <Font name="Cascadia Code Regular" size="36.0" />
                     </font>
@@ -41,8 +41,8 @@
             <Label fx:id="cpswdLabel" layoutX="40.0" layoutY="258.0" prefHeight="17.0" prefWidth="99.0" text="Confirm Password" textFill="#793333" />
             <Label fx:id="uimageLabel" layoutX="40.0" layoutY="331.0" prefHeight="17.0" prefWidth="67.0" text="User Image" textFill="#793333" />
             <Circle fx:id="userUploadProfilePic" fill="DODGERBLUE" layoutX="90.0" layoutY="413.0" radius="54.0" stroke="BLACK" strokeType="INSIDE" />
-            <Button fx:id="fileUploadButton" layoutX="176.0" layoutY="404.0" mnemonicParsing="false" onAction="#handleProfilePicUpload" text="File" />
-            <Label fx:id="navLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="534.0" onMouseClicked="#handleLoadLogin" prefHeight="18.0" prefWidth="162.0" text="Already have an account Log now " textAlignment="CENTER">
+            <Button fx:id="fileUploadButton" styleClass="custom-button" layoutX="176.0" layoutY="404.0" mnemonicParsing="false" onAction="#handleProfilePicUpload" text="File" />
+            <Label fx:id="navLabel" styleClass="nav-label" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="534.0" onMouseClicked="#handleLoadLogin" prefHeight="18.0" prefWidth="162.0" text="Already have an account Log now " textAlignment="CENTER">
                <font>
                   <Font size="10.0" />
                </font>

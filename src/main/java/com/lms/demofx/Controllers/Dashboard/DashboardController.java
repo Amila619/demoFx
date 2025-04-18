@@ -1,7 +1,6 @@
 package com.lms.demofx.Controllers.Dashboard;
 
 import com.lms.demofx.Controllers.Base.BaseController;
-import com.lms.demofx.Utils.SceneHandler;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
