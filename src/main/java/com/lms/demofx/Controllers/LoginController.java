@@ -61,7 +61,7 @@ public class LoginController extends BaseController {
 
             if (username.equals("") || password.equals("")) {
                 CustomUi.popUpErrorMessage("Username and Password are Required", "Login Error", Alert.AlertType.WARNING);
-            }else if (!ValidationUtils.validateEmail(username)) {
+            }else if (ValidationUtils.validateEmail(username)) {
                 CustomUi.popUpErrorMessage("Enter a proper Email Address", "Login Error", Alert.AlertType.WARNING);
             } else {
 

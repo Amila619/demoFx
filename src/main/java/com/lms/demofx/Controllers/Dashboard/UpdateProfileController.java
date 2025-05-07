@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 public class UpdateProfileController extends DashboardController {
 
     private String username, npassword, cpassword, upassword;
+
     @FXML
     private Label cpswdLabel;
 

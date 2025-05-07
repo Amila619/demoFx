@@ -76,7 +76,7 @@ public class SignupController extends BaseController {
 
             if (username.equals("") || password.equals("") || cpassword.equals("")) {
                 CustomUi.popUpErrorMessage("All Fields are Required", "Signup Error", Alert.AlertType.WARNING);
-            } else if (!ValidationUtils.validateEmail(username)) {
+            } else if (ValidationUtils.validateEmail(username)) {
                 CustomUi.popUpErrorMessage("Enter a proper Email Address", "Login Error", Alert.AlertType.WARNING);
             } else if (!password.equals(cpassword)) {
                 CustomUi.popUpErrorMessage("Passwords do not match", "Signup Error", Alert.AlertType.WARNING);

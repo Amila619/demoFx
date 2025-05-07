@@ -6,6 +6,12 @@ public class User {
     private int age;
     private String province;
 
+    public User(String name, int age, String province) {
+        this.name = name;
+        this.age = age;
+        this.province = province;
+    }
+
     public String getName() {
         return name;
     }
@@ -18,10 +24,5 @@ public class User {
         return province;
     }
 
-    public User(String name, int age, String province) {
-        this.name = name;
-        this.age = age;
-        this.province = province;
-    }
 
 }

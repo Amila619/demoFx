@@ -20,15 +20,11 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Collections;
 import java.util.ResourceBundle;
-import java.util.stream.Stream;
 
 public class BaseController implements Initializable {
     protected Parent root;
@@ -118,26 +114,11 @@ public class BaseController implements Initializable {
         if (selectedFile != null) {
             Image image = new Image(selectedFile.toURI().toString());
             profilePic.setFill(new ImagePattern(image));
-            saveImage(selectedFile);
-        }
-    }
-
-    public static void emptyDirectoryFiles(String path_) {
-        Path rootDir = Path.of(path_);
-
-        try (Stream<Path> files = Files.walk(rootDir)) {
-            files
-                    .sorted(Collections.reverseOrder())
-                    .filter(path -> !path.equals(rootDir))
-                    .forEach(path -> {
-                        try {
-                            Files.delete(path);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    });
-        } catch (IOException e) {
-            e.printStackTrace();
+            try {
+                is = new FileInputStream(selectedFile);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
     }
 
